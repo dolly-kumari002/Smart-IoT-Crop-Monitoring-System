@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password - Crop Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex items-center justify-center min-h-screen bg-[url('image7.png')] bg-cover bg-center h-screen overflow-hidden ">
+  <div class="bg-white bg-opacity-70 p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center text-blue-500 mb-6">Reset Your Password</h1>
+    <form id="resetForm" class="space-y-4" action="forgot.php" method="POST">
+      <div>
+        <label for="email" class="block font-medium">Registered Email</label>
+        <input type="email" id="email" name="email" class="w-full p-2 border rounded" placeholder="you@example.com" required>
+      </div>
+      <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Send Reset Link</button>
+    </form>
+    <p class="mt-4 text-center text-sm text-gray-600">
+      <a href="index.html" class="text-blue-700 hover:underline">Back to Login</a>
+    </p>
+  </div>
+
+  <!-- <script>
+    document.getElementById("resetForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+
+      // Simulate sending a reset email (replace with real API call)
+      alert(`If an account with ${email} exists, a password reset link has been sent.`);
+    });
+  </script> -->
+</body>
+
+</html>

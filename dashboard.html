@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Login Sucessful...</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-[url('image5.jpg')] bg-cover bg-center h-screen overflow-hidden font-inter">
+  <div class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-green-650 bg-opacity-75 text-white flex flex-col p-6 space-y-6">
+      <h1 class="text-2xl font-bold">Crop Dashboard</h1>
+      <nav class="flex-1 space-y-3">
+        <a href="#current" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Current Conditions</a>
+        <a href="#alerts" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Alerts</a>
+        <a href="#graphs" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Graphs</a>
+        <a href="#live" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Live Feed</a>
+        <a href="#history" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Historical Data</a>
+        <a href="#recommendations" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Recommendations</a>
+        <a href="#settings" class="block hover:bg-green-600 px-4 py-2 rounded-lg">Settings</a>
+      </nav>
+      <button onclick="window.location.href='index.html'", class="mt-auto bg-red-600 hover:bg-red-700 py-2 rounded-lg text-center">Logout</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8 space-y-10">
+      <header class="flex justify-between items-center">
+        <h2 class="text-3xl font-semibold text-yellow-900">Smart Crop Monitoring</h2>
+        <span class="text-sm text-gray-600">Last updated: <span id="last-updated">--:--</span></span>
+      </header>
+
+      <!-- Current Conditions -->
+      <section id="current" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Current Crop Conditions</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div class="bg-green-100 p-4 rounded-lg">
+            <p class="text-lg">🌡️ Temperature</p>
+            <p class="text-3xl font-bold" id="temperature">-- °C</p>
+          </div>
+          <div class="bg-blue-100 p-4 rounded-lg">
+            <p class="text-lg">💧 Humidity</p>
+            <p class="text-3xl font-bold" id="humidity">-- %</p>
+          </div>
+          <div class="bg-yellow-100 p-4 rounded-lg">
+            <p class="text-lg">🌱 Soil Moisture</p>
+            <p class="text-3xl font-bold" id="moisture">-- %</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Alerts -->
+      <section id="alerts" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Alerts</h3>
+        <ul class="list-disc pl-5 text-red-600" id="alerts-list">
+          <li>No alerts currently.</li>
+        </ul>
+      </section>
+
+      <!-- Graphs -->
+      <section id="graphs" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Trend Graphs</h3>
+        <canvas id="trendChart" class="w-full h-64"></canvas>
+      </section>
+
+      <!-- Live Sensor Feed -->
+      <section id="live" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Live Sensor Feed</h3>
+        <p id="live-feed">Connecting to live feed...</p>
+      </section>
+
+      <!-- Historical Data -->
+      <section id="history" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Historical Data</h3>
+        <div class="flex flex-col md:flex-row gap-4">
+          <input type="date" id="startDate" class="border p-2 rounded">
+          <input type="date" id="endDate" class="border p-2 rounded">
+          <button onclick="fetchHistoricalData()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">View</button>
+        </div>
+        <div id="historical-data" class="mt-4"></div>
+      </section>
+
+      <!-- Recommendations -->
+      <section id="recommendations" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Recommendations</h3>
+        <ul class="list-disc pl-5" id="recommendations-list">
+          <li>Irrigate now if moisture < 30%.</li>
+          <li>Check pH levels if yellowing observed.</li>
+        </ul>
+      </section>
+
+      <!-- Settings -->
+      <section id="settings" class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">Settings / Profile</h3>
+        <form class="space-y-4">
+          <div>
+            <label class="block font-medium">Sensor ID</label>
+            <input type="text" class="w-full p-2 border rounded" placeholder="Enter sensor ID">
+          </div>
+          <div>
+            <label class="block font-medium">Location</label>
+            <input type="text" class="w-full p-2 border rounded" placeholder="Enter farm location">
+          </div>
+          <div>
+            <label class="block font-medium">Crop Type</label>
+            <select class="w-full p-2 border rounded">
+              <option>Wheat</option>
+              <option>Rice</option>
+              <option>Maize</option>
+              <option>Vegetables</option>
+            </select>
+          </div>
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Save</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function fetchSensorData() {
+      fetch('#').then((res) => {
+        res.json()
+        }).then((data) => {
+          document.getElementById('temperature').textContent = `23 °C`;
+          document.getElementById('humidity').textContent = `44 %`;
+          document.getElementById('moisture').textContent = `45 %`;
+          document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+          let soil_moisture=45;
+          if (soil_moisture < 30) {
+            document.getElementById('alerts-list').innerHTML = '<li> ⚠️ Soil moisture is low! Irrigate now.</li>';
+          } else {
+            document.getElementById('alerts-list').innerHTML = '<li>✅ All good.</li>';
+          }
+        });
+    }
+
+    setInterval(fetchSensorData, 1000);
+
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    const trendChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ["10AM", "11AM", "12PM", "1PM", "2PM"],
+        datasets: [{
+          label: 'Soil Moisture',
+          data: [45, 42, 40, 38, 36],
+          borderColor: 'green',
+          fill: false
+        }]
+      }
+    });
+
+    function fetchHistoricalData() {
+      const start = document.getElementById('startDate').value;
+      const end = document.getElementById('endDate').value;
+      document.getElementById('historical-data').textContent = `Fetching data from ${start} to ${end}...`;
+    }
+  </script>
+</body>
+
+</html>

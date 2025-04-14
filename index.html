@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login To Crop Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[url('image1.jpg')] bg-cover bg-center h-screen overflow-hidden">
+  
+    <div class="w-full bg-white/65 py-5 shadow-lg text-center">
+      <h2 class="text-2xl font-bold font-serif text-green-700">Welcome to Smart Crop Monitoring System</h2>
+    </div>
+  
+    <div class="flex items-center justify-center min-h-screen pt-0">
+      <div class="bg-white bg-opacity-85 p-8 rounded-lg shadow-lg w-full max-w-md">
+        
+        <div class="flex items-center justify-center mb-4 space-x-3">
+          <img src="logo-0_1.png" alt="logo_1.png" class="h-12 w-12 rounded-full object-contain">
+          <h1 class="text-2xl font-bold text-green-700">AgroSense IoT</h1>
+        </div>
+  
+        <form id="loginForm" class="space-y-4" action="login_0.php" method="POST">
+          <div>
+            <label for="Username" class="block font-medium">Username</label>
+            <input type="text" id="Username" name="Username" class="w-full p-2 border rounded" placeholder="enter your username " required>
+          </div>
+          <div>
+            <label for="password" class="block font-medium">Password</label>
+            <input type="password" id="password" name="password" class="w-full p-2 border rounded" placeholder="••••••••" required>
+          </div>
+          <div class="flex items-center justify-between">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" class="form-checkbox">
+              <span>Remember me</span>
+            </label>
+            <a href="forgot.html" class="text-sm text-green-700 hover:underline">Forgot password?</a>
+          </div>
+          <button type="submit" class="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700">Login</button>
+        </form>
+        <p class="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?
+          <a href="sign_up.html" class="text-green-700 hover:underline">Sign up</a>
+        </p>
+      </div>
+    </div>
+  
+    <!-- <script>
+      document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const Username = document.getElementById("Username").value;
+        const password = document.getElementById("password").value;
+  
+        if ((Username === "jaycob44" && password === "Utk@93990") || (Username === "rahul5693" && password === "rahul@")) {
+          alert("Login successful");
+          window.location.href = "dashboard.html";
+        } else {
+          alert("Invalid credentials");
+        }
+      });
+    </script> -->
+  </body>
+  
+
+</html>
